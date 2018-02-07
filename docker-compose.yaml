@@ -4,11 +4,14 @@ services:
     image: weatherapp_backend
     ports:
      - "9000:9000"
-    working_dir: /backend
+    volumes:
+     - ".:backend"
     command: "npm start"
   webapp:
     image: weatherapp_backend
-    working_dir: /frontend
+    #working_dir: ./frontend
+    volumes:
+     - ".:frontend"
     ports:
      - "8000:8000"
     command: "npm start"
