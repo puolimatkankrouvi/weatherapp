@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Geolocation from "react-geolocation";
+import Geolocation from 'react-geolocation';
 
 const baseURL = process.env.ENDPOINT;
 
@@ -8,17 +8,15 @@ const getWeatherFromApi = async () => {
   try {
     // Latitude and longitude are passed in body
     // Or change to GET url parameters?
-    const response = await fetch(
-                                  `${baseURL}/weather`,
-                                  {
-                                    headers:{
-                                      'Accept': 'application/json',
-                                      'Content-type': 'application/json'
-                                    },
-                                    method: 'POST',
-                                    body: JSON.Stringify({ lat:this.state.latitude, lon:this.state.longitude })
-                                  }
-                                );
+    const request = {
+      headers: {
+        'Content-type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.Stringify({ lat: this.state.latitude, lon: this.state.longitude, })
+    };
+
+    const response = await fetch(`${baseURL}/weather`, request);
     return response.json();
   } catch (error) {
     console.error(error);
@@ -33,8 +31,8 @@ class Weather extends React.Component {
     this.state = {
       icon: '',
       description: '',
-      latitude: float,
-      longitude: float,
+      latitude: '',
+      longitude: '',
     };
   }
 
@@ -47,13 +45,12 @@ class Weather extends React.Component {
   render() {
     const { icon } = this.state.icon;
     return (
-      /*
       <div className="icon">
         { icon && <img src={`/img/${icon}.svg`} /> }
       </div>
-      */
+      /*
       <div>
-        <Geolocation 
+        <Geolocation
           render={
             ({
               fetchingPosition,
@@ -70,6 +67,7 @@ class Weather extends React.Component {
 
         />
       </div>
+      */
     );
   }
 }
