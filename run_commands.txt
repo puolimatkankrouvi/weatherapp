@@ -14,5 +14,11 @@ http://192.168.99.100:8000/
 
 docker swarm init --advertise-addr 192.168.99.100
 docker stack deploy -c docker-compose.yaml weatherapp
-
+//Removing dervices
 docker service rm $(docker service ls)
+
+
+
+//Creating and running volume on based on service
+docker volume create backend-vol
+docker run --rm -i -p 9000:9000 --mount source=backend-vol,target=/backend weatherapp_backend

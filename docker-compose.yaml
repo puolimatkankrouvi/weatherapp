@@ -11,6 +11,9 @@ services:
      - "9000:9000"
     # Start command after image is build
     command: npm start
+    # Volumes it uses
+    volumes:
+     - "backend-vol:/backend"
   frontend:
     image: weatherapp_frontend
     build: ./frontend
@@ -20,3 +23,8 @@ services:
     ports:
      - "8000:8000"
     command: npm start
+    volumes:
+     - "frontend-vol:/frontend"
+volumes:
+  frontend-vol:
+  backend-vol:
