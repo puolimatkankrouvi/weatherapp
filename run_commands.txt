@@ -1,0 +1,18 @@
+//Images already built
+docker build -t weatherapp_backend .
+docker build -t weatherapp_frontend .
+
+
+docker run --rm -i -p 8000:8000 --name weatherapp_frontend -t weatherapp_frontend
+
+docker run --rm -i -p 9000:9000 --name weatherapp_backend -t weatherapp_backend
+
+docker address: 192.168.99.100
+
+http://192.168.99.100:9000/api/weather
+http://192.168.99.100:8000/
+
+docker swarm init --advertise-addr 192.168.99.100
+docker stack deploy -c docker-compose.yaml weatherapp
+
+docker service rm $(docker service ls)

@@ -1,21 +1,22 @@
-version: '3'
+# Composer file format version
+version: "3"
 services:
   server:
+    # Path to build context
+    build: ./backend
+    # Name of the image
     image: weatherapp_backend
+    # Service opens ports "host_port : container_port"
     ports:
      - "9000:9000"
-    volumes:
-     - ".:backend"
-    command: "npm start"
-  webapp:
-    image: weatherapp_backend
-    #working_dir: ./frontend
-    volumes:
-     - ".:frontend"
+    # Start command after image is build
+    command: npm start
+  frontend:
+    image: weatherapp_frontend
+    build: ./frontend
+    # frontend depends on server, so it is build first
+    depends_on:
+     - server
     ports:
      - "8000:8000"
-    command: "npm start"
-     
-volumes:
-  server:
-  webapp:
+    command: npm start

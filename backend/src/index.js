@@ -14,7 +14,7 @@ const port = process.env.PORT || 9000;
 
 const app = new Koa();
 
-app.use(cors());
+app.use(cors(), bodyParser());
 
 const fetchWeather = async (geolocation) => {
 

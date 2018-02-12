@@ -6,8 +6,7 @@ const baseURL = process.env.ENDPOINT;
 
 const getWeatherFromApi = async () => {
   try {
-    // Latitude and longitude are passed in body
-    // Or change to GET url parameters?
+    // Latitude and longitude are passed in POST body
     const request = {
       headers: {
         'Content-type': 'application/json',
