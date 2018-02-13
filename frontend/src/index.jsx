@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Geolocation from 'react-geolocation';
 
-const baseURL = process.env.ENDPOINT;
+const baseURL = 'http://192.168.99.100:9000/api';//process.env.ENDPOINT;
 
 const getWeatherFromApi = async () => {
   try {
