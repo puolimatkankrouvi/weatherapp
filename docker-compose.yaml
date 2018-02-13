@@ -13,7 +13,7 @@ services:
     command: npm start
     # Volumes it uses
     volumes:
-     - "backend-vol:/backend"
+     - backend-vol:/backend
   frontend:
     image: weatherapp_frontend
     build: ./frontend
@@ -24,7 +24,7 @@ services:
      - "8000:8000"
     command: npm start
     volumes:
-     - "frontend-vol:/frontend"
+     - frontend-vol:/frontend
 volumes:
   frontend-vol:
   backend-vol:

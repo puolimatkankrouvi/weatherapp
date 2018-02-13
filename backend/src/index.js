@@ -17,20 +17,17 @@ const app = new Koa();
 app.use(cors(), bodyParser());
 
 const fetchWeather = async (geolocation) => {
-
   /*
     Now retrieves five day forecast JSON, instead of current weather
    */
   var endpoint = `${mapURI}/forecast?q=${targetCity}&appid=${appId}&`;
 
   // Uses geolocation's longitude and latitude if available
-  if(geolocation){
-    latitude = geolocation.lat;
-    longitude = geolocation.lon;
+  if (geolocation) {
+    const latitude = geolocation.lat;
+    const longitude = geolocation.lon;
     endpoint = `${mapURI}/forecast?lat=${latitude}&lon=${longitude}&appid=${appId}&`;
   }
-
-  console.log(endpoint);
 
   const response = await fetch(endpoint);
 
@@ -39,11 +36,10 @@ const fetchWeather = async (geolocation) => {
 
 /* Get version for sending latitude and longitude in parameters */
 router.get('/api/weather', async ctx => {
+  let geolocation = null;
 
-  geolocation = null;
-
-  if(ctx.query.lat && ctx.query.lon ){
-    geolocation = { lat: ctx.query.lat, lon: ctx.query.lon };
+  if (ctx.query.lat && ctx.query.lon) {
+    geolocation = { lat: ctx.query.lat, lon: ctx.query.lon, };
   }
 
   const weatherData = await fetchWeather(geolocation);
@@ -56,8 +52,8 @@ router.get('/api/weather', async ctx => {
 /* Post version for sending latitude and longitude in post body */
 router.post('/api/weather', async ctx => {
   let geolocation = null;
-  if( ctx.request.body.lat && ctx.request.body.lon ){
-    geolocation = {lat: ctx.request.body.lat , lon: ctx.request.body.lon };
+  if (ctx.request.body.lat && ctx.request.body.lon) {
+    geolocation = { lat: ctx.request.body.lat, lon: ctx.request.body.lon, };
   }
   const weatherData = await fetchWeather(geolocation);
 

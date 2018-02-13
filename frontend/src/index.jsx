@@ -12,9 +12,8 @@ const getWeatherFromApi = async () => {
         'Content-type': 'application/json',
       },
       method: 'POST',
-      body: JSON.Stringify({ lat: this.state.latitude, lon: this.state.longitude, })
+      body: JSON.Stringify({ lat: this.state.latitude, lon: this.state.longitude }),
     };
-
     const response = await fetch(`${baseURL}/weather`, request);
     return response.json();
   } catch (error) {
@@ -45,7 +44,7 @@ class Weather extends React.Component {
     const { icon } = this.state.icon;
     return (
       <div className="icon">
-        { icon && <img src={`/img/${icon}.svg`} /> }
+        { icon && <img src={`/img/${icon}.svg`} alt="weather icon" /> }
       </div>
       /*
       <div>
